@@ -1,13 +1,20 @@
 require("dotenv").config();
 var keys = require("./keys.js");
 var fs = require('fs');
-var spotify = require('node-spotify-api');
-var twitter = require('twitter');
+var nodeSpotifyAPI = require('node-spotify-api');
+var Twitter = require('twitter');
 var request = require('request');
 
+var client = new Twitter(keys.twitter);
+var params = {screen_name: 'strubigblue'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    for (i = 0; i < tweets.length; i++) {
+        console.log(tweets[i].text);
+    } 
+  }
+});
 
 
-var spotifyKeys = new Spotify(keys.spotify);
-var twitterKeys = new Twitter(keys.twitter);
-console.log(spotifyKeys);
-console.log(twitterKeys);
+
+// var spotify = new Spotify(keys.spotify);
